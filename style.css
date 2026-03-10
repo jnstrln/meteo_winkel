@@ -1,0 +1,35 @@
+/* Styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    text-align: center;
+    padding: 2rem;
+}
+
+header h1 {
+    color: #1e90ff;
+    margin-bottom: 2rem;
+}
+
+/* Conteneur des données */
+#data {
+    background-color: #fff;
+    padding: 1.5rem 2rem;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 280px;
+    max-width: 400px;
+    transition: all 0.5s ease-in-out;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    #data {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}

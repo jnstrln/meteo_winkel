@@ -7,19 +7,11 @@
 
 #include "secrets.h"
 
-/*#include <SPI.h>
-#define BME_SCK 18
-#define BME_MISO 19
-#define BME_MOSI 23
-#define BME_CS 5*/
-
 #define SDA_PIN 21
 #define SCL_PIN 22
 #define SEALEVELPRESSURE_HPA (1020)
 
 Adafruit_BME280 bme; // I2C
-//Adafruit_BME280 bme(BME_CS); // hardware SPI
-//Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO, BME_SCK); // software SPI
 
 BH1750 lightMeter;
 
@@ -163,7 +155,7 @@ void setup(){
     lightMeter.begin();
 
     Serial.println("-- Default Test --");
-    delayTime = 30000;
+    delayTime = 60000;
 
     Serial.println();
 }
