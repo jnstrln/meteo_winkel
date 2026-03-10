@@ -61,7 +61,8 @@ async function getHistory() {
         .from("weather_station")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(100)
+        .limit(120)
+        .order("created_at", { ascending: true })
 
     if (error) {
 
