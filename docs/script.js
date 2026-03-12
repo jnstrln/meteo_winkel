@@ -54,7 +54,7 @@ async function getHistory() {
             limit = 180; // 1 point / minute
             break;
         case "24h":
-            table = "weather_10min"; // moyenne 5 min
+            table = "weather_10min"; // moyenne 10 min
             timeColumn = "time_10min";
             limit = 144; // 1 point / 10 min
             break;
@@ -94,7 +94,7 @@ function prepareData(data, variable) {
     const values = [];
 
     data.forEach(row => {
-        let dateValue = row.created_at || row.time_5min || row.hour || row.day;
+        let dateValue = row.created_at || row.time_10min || row.hour || row.day;
         labels.push(new Date(dateValue).toLocaleString("fr-FR", { hour: "2-digit", minute: "2-digit", day: "numeric", month: "numeric" }));
         values.push(row[variable]);
     });
