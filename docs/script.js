@@ -49,7 +49,7 @@ async function getHistory() {
 
     switch (currentPeriod) {
         case "3h":
-            table = "weather_station";
+            table = "weather_3h";
             timeColumn = "created_at";
             break;
         case "24h":
