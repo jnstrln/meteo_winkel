@@ -8,12 +8,10 @@
   <title>Station météo Winkel</title>
 
   <link rel="stylesheet" href="style.css">
-
   <link rel="icon" href="favicon.ico">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-
   <script src="script.js" defer></script>
 </head>
 
@@ -31,8 +29,14 @@
     </section>
 
     <section class="card">
-
       <h2>Historique</h2>
+
+      <div id="periodButtons">
+        <button data-period="3h">3h</button>
+        <button data-period="24h">24h</button>
+        <button data-period="7j">7j</button>
+        <button data-period="30j">30j</button>
+      </div>
 
       <select id="variableSelect">
         <option value="temperature">Température</option>
@@ -42,7 +46,6 @@
       </select>
 
       <canvas id="weatherChart"></canvas>
-
     </section>
 
   </main>

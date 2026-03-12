@@ -43,3 +43,23 @@ select {
 canvas {
     max-width: 100%;
 }
+
+#periodButtons {
+    margin-bottom: 1rem;
+}
+
+#periodButtons button {
+    margin: 0 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #1e90ff;
+    background: #fff;
+    color: #1e90ff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#periodButtons button:hover {
+    background: #1e90ff;
+    color: #fff;
+}
