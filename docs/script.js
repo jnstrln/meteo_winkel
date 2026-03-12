@@ -51,29 +51,34 @@ async function getHistory() {
         case "3h":
             table = "weather_3h";
             timeColumn = "created_at";
+            limit = 180; // 1 point / minute
             break;
         case "24h":
             table = "weather_10min"; // moyenne 5 min
             timeColumn = "time_10min";
+            limit = 144; // 1 point / 10 min
             break;
         case "7j":
             table = "weather_hourly"; // moyenne horaire
             timeColumn = "hour";
+            limit = 168; // 1 point / heure
             break;
         case "30j":
             table = "weather_daily"; // moyenne journalière
             timeColumn = "day";
+            limit = 30; // 1 point / jour
             break;
         default:
             table = "weather_station";
             timeColumn = "created_at";
+            limit = 160;
     }
 
     const { data, error } = await client
         .from(table)
         .select("*")
         .order(timeColumn, { ascending: true })  // on utilise la colonne exacte
-        .limit(500); // limite pour ne pas trop charger de points
+        .limit(limit); // limite pour ne pas trop charger de points
 
     if (error) {
         console.error(error);
