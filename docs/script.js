@@ -53,8 +53,8 @@ async function getHistory() {
             timeColumn = "created_at";
             break;
         case "24h":
-            table = "weather_5min"; // moyenne 5 min
-            timeColumn = "time_5min";
+            table = "weather_10min"; // moyenne 5 min
+            timeColumn = "time_10min";
             break;
         case "7j":
             table = "weather_hourly"; // moyenne horaire
