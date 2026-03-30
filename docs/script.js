@@ -67,7 +67,7 @@ async function analyzeData({ weather }) {
     const { data, error } = await client
         .from("weather_3h")
         .select("pressure, created_at")
-        .order("created_at", { ascending: false })
+        .order("created_at", { ascending: true })
         .limit(1);
 
     if (error || !data || data.length === 0) {
