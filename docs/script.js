@@ -231,15 +231,20 @@ document.querySelectorAll("#periodButtons button").forEach(btn => {
     });
 });
 
-// Initialisation
-async function main() {
+async function refresh() {
     const lastMeasure = await loadWeather();
+    if (!lastMeasure) return;
+
     displayWeather(lastMeasure);
     analyzeData(lastMeasure);
+}
+
+// Initialisation
+async function main() {
+    await refresh();
     updateGraph();
-    setInterval(loadWeather, 60000);
-    setInterval(displayWeather, 60000);
-    setInterval(analyzeData, 60000);
+
+    setInterval(refresh, 60000);
 }
 
 // Execution
