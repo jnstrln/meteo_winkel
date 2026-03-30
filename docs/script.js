@@ -109,7 +109,7 @@ async function analyzeData({ weather }) {
     }
 
     document.getElementById("analyzeData").innerHTML =
-        `🌗 Période : ${dayStatus}
+        `🌗 Période : ${dayStatus} <br>
          🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
          📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa) <br>
          Météo possible : ${possibleWeather}`;
