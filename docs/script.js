@@ -220,6 +220,8 @@ async function main() {
     analyzeData(lastMeasure);
     updateGraph();
     setInterval(loadWeather, 60000);
+    setInterval(displayWeather, 60000);
+    setInterval(analyzeData, 60000);
 }
 
 // Execution
