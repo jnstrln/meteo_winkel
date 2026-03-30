@@ -4,8 +4,6 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let chart
-let currentPeriod = "3h"; // période par défaut
-let currentVariable = "temperature";
 
 // Formatage français
 function formatDate(dateString) {
@@ -129,6 +127,7 @@ async function analyzeData({ weather }) {
 async function getHistory() {
     let table;
     let timeColumn;
+    let limit;    
 
     switch (currentPeriod) {
         case "3h":
@@ -220,14 +219,27 @@ async function updateGraph() {
 // Gestion des changements de variable
 document.getElementById("variableSelect").addEventListener("change", e => {
     currentVariable = e.target.value;
+    localStorage.setItem("variable", currentVariable);
     updateGraph();
 });
+
+function updateActiveButtons() {
+    document.querySelectorAll("#periodButtons button").forEach(btn => {
+        btn.classList.remove("active");
+
+        if (btn.dataset.period === currentPeriod) {
+            btn.classList.add("active");
+        }
+    });
+}
 
 // Gestion des changements de période
 document.querySelectorAll("#periodButtons button").forEach(btn => {
     btn.addEventListener("click", e => {
         currentPeriod = e.target.dataset.period;
+        localStorage.setItem("period", currentPeriod);
         updateGraph();
+        updateActiveButtons();
     });
 });
 
@@ -241,6 +253,13 @@ async function refresh() {
 
 // Initialisation
 async function main() {
+    currentVariable = localStorage.getItem("variable") || "temperature";
+    currentPeriod = localStorage.getItem("period") || "3h";
+
+    document.getElementById("variableSelect").value = currentVariable;
+
+    updateActiveButtons();
+
     await refresh();
     updateGraph();
 
