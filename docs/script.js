@@ -75,6 +75,8 @@ async function analyzeData({ weather }) {
         return;
     }
 
+    const pressure3h = data[0].pressure;
+
     // Calcul de tendance
     const delta = pressureMeasured - pressure3h;
 
@@ -86,8 +88,6 @@ async function analyzeData({ weather }) {
     } else {
         trend = "Stable ➖";
     }
-
-    const pressure3h = data[0].pressure;
 
     // Pluie ?
     let possibleWeather;
