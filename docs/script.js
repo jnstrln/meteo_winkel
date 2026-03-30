@@ -20,6 +20,14 @@ function formatDate(dateString) {
     });
 }
 
+function applyTheme(isNight) {
+    if (isNight) {
+        document.body.classList.add("dark");
+    } else {
+        document.body.classList.remove("dark");
+    }
+}
+
 // Charger la dernière mesure
 async function loadWeather() {
     const { data, error } = await client
@@ -52,7 +60,9 @@ async function displayWeather({ weather }) {
 async function analyzeData({ weather }) {
 
     // Détermination jour/nuit
-    const dayStatus = (weather.light === 0) ? "Nuit 🌙" : "Jour ☀️";
+    const isNight = (weather.light === 0);
+    applyTheme(isNight);
+    const dayStatus = isNight ? "Nuit 🌙" : "Jour ☀️";
 
     // altitude de Winkel en mètres
     const altitude = 566;

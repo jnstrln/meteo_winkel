@@ -1,7 +1,39 @@
+/* =========================
+   Variables (thème clair)
+========================= */
+:root {
+    --bg: #f0f4f8;
+    --text: #333;
+    --card-bg: #ffffff;
+    --primary: #1e90ff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   Thème sombre
+========================= */
+body.dark {
+    --bg: #121212;
+    --text: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --primary: #4da3ff;
+    --shadow: rgba(0, 0, 0, 0.6);
+}
+
+/* =========================
+   Transition globale (bonus)
+========================= */
+* {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* =========================
+   Base
+========================= */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: var(--bg);
+    color: var(--text);
 
     margin: 0;
     padding: 2rem;
@@ -10,7 +42,7 @@ body {
 }
 
 header h1 {
-    color: #1e90ff;
+    color: var(--primary);
     margin-bottom: 2rem;
 }
 
@@ -19,36 +51,47 @@ main {
     margin: auto;
 }
 
+/* =========================
+   Cartes
+========================= */
 .card {
-    background: white;
+    background: var(--card-bg);
 
     padding: 1.5rem;
     margin-bottom: 2rem;
 
     border-radius: 10px;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
-#analyzeData {
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
+/* =========================
+   Texte
+========================= */
+#analyzeData,
 #data {
     font-size: 1.1rem;
     line-height: 1.6;
 }
 
+/* =========================
+   Select
+========================= */
 select {
     margin-bottom: 1rem;
     padding: 0.4rem;
 }
 
+/* =========================
+   Graph
+========================= */
 canvas {
     max-width: 100%;
 }
 
+/* =========================
+   Boutons période
+========================= */
 #periodButtons {
     margin-bottom: 1rem;
 }
@@ -56,15 +99,18 @@ canvas {
 #periodButtons button {
     margin: 0 0.3rem;
     padding: 0.4rem 0.8rem;
+
     border-radius: 5px;
-    border: 1px solid #1e90ff;
-    background: #fff;
-    color: #1e90ff;
+    border: 1px solid var(--primary);
+
+    background: var(--card-bg);
+    color: var(--primary);
+
     cursor: pointer;
     font-weight: bold;
 }
 
 #periodButtons button:hover {
-    background: #1e90ff;
+    background: var(--primary);
     color: #fff;
 }
