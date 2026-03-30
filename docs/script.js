@@ -51,6 +51,9 @@ async function displayWeather({ weather }) {
 // Analyse la dernière mesure
 async function analyzeData({ weather }) {
 
+    // Détermination jour/nuit
+    const dayStatus = (weather.light === 0) ? "Nuit 🌙" : "Jour ☀️";
+
     // altitude de Winkel en mètres
     const altitude = 566;
 
@@ -60,12 +63,36 @@ async function analyzeData({ weather }) {
     // calcul de la pression corrigée au niveau de la mer
     const seaLevelPressure = pressureMeasured / Math.pow(1 - altitude / 44330.0, 5.255);
 
-    // Détermination jour/nuit
-    const dayStatus = (weather.light === 0) ? "Nuit 🌙" : "Jour ☀️";
+    // Récupération de la pression il y a 3h
+    const { data, error } = await client
+        .from("weather_3h")
+        .select("pressure, created_at")
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+    if (error || !data || data.length === 0) {
+        console.error(error);
+        return;
+    }
+
+    // Calcul de tendance
+    const delta = pressureMeasured - pressure3h;
+
+    let trend;
+    if (delta > 0.5) {
+        trend = "Hausse 📈";
+    } else if (delta < -0.5) {
+        trend = "Baisse 📉";
+    } else {
+        trend = "Stable ➖";
+    }
+
+    const pressure3h = data[0].pressure;
 
     document.getElementById("analyzeData").innerHTML =
-        `🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
-         🌗 Période : ${dayStatus}`;
+        `🌗 Période : ${dayStatus}
+         🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
+         📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa`;
 }
 
 // Charger l’historique selon la période
