@@ -60,9 +60,12 @@ async function analyzeData({ weather }) {
     // calcul de la pression corrigée au niveau de la mer
     const seaLevelPressure = pressureMeasured / Math.pow(1 - altitude / 44330.0, 5.255);
 
+    // Détermination jour/nuit
+    const dayStatus = (weather.light === 0) ? "Nuit 🌙" : "Jour ☀️";
+
     document.getElementById("analyzeData").innerHTML =
         `🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
-         test`;
+         🌗 Période : ${dayStatus}`;
 }
 
 // Charger l’historique selon la période
