@@ -89,21 +89,29 @@ async function analyzeData({ weather }) {
         trend = "Stable ➖";
     }
 
-    // Pluie ?
-    let possibleWeather;
-    if (weather.humidity >= 70 and 0 < weather.light <= 75 and pressure3h < 0.5) {
+    // Pluie / neige ?
+    let possibleWeather = "Rien de notable";
+
+    if (
+        weather.humidity >= 70 &&
+        weather.light > 0 &&
+        weather.light <= 75 &&
+        delta < 0.5
+    ) {
         if (weather.temperature > 3) {
-            possibleWeather = "Pluie"
+            possibleWeather = "Pluie 🌧";
+        } else {
+            possibleWeather = "Neige ❄️";
         }
-        else {
-            possibleWeather = "Neige"
-        }
+    }
+    else if (delta > 1 && weather.humidity < 60) {
+        possibleWeather = "Beau temps ☀️";
     }
 
     document.getElementById("analyzeData").innerHTML =
         `🌗 Période : ${dayStatus}
          🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
-         📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa
+         📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa) <br>
          Météo possible : ${possibleWeather}`;
 }
 
