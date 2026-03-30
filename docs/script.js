@@ -89,10 +89,22 @@ async function analyzeData({ weather }) {
 
     const pressure3h = data[0].pressure;
 
+    // Pluie ?
+    let possibleWeather;
+    if (weather.humidity >= 70 and 0 < weather.light <= 75 and pressure3h < 0.5) {
+        if (weather.temperature > 3) {
+            possibleWeather = "Pluie"
+        }
+        else {
+            possibleWeather = "Neige"
+        }
+    }
+
     document.getElementById("analyzeData").innerHTML =
         `🌗 Période : ${dayStatus}
          🌬 Pression corrigée : ${seaLevelPressure.toFixed(2)} hPa <br>
-         📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa`;
+         📊 Tendance (3h) : ${trend} (${delta.toFixed(2)} hPa
+         Météo possible : ${possibleWeather}`;
 }
 
 // Charger l’historique selon la période
